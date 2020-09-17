@@ -5,7 +5,7 @@ var roundsOfVotes = 25;
 var allProducts = [];
 
 
-var resultsNav = document.getElementById('finalResults')
+var resultsNav = document.getElementById('finalResults');
 // var imageIndex = document.getElementById('images');
 var leftImage = document.getElementById('left');
 var centerImage = document.getElementById('center');
@@ -72,7 +72,7 @@ function oneClickVote(click) {
     }
 
     if (roundsOfVotes > 0) {
-        renderImage();
+        renderProducts();
     } else {
         rightImage.removeEventListener('click', oneClickVote);
         leftImage.removeEventListener('click', oneClickVote);
@@ -85,6 +85,44 @@ function oneClickVote(click) {
 rightImage.addEventListener('click', oneClickVote);
 leftImage.addEventListener('click', oneClickVote);
 centerImage.addEventListener('click', oneClickVote);
+
+function renderProducts() {
+
+    //    created 3 newImage and store for reference
+    var img1Render = rightImage.src;
+    var img2Render = leftImage.src;
+    var img3Render = centerImage.src;
+
+    // randomlySelect a new Image for each image on the page
+    var newImage1 = allProducts[randomProductIndex(allProducts.length)].images;
+    var newImage2 = allProducts[randomProductIndex(allProducts.length)].images;
+    var newImage3 = allProducts[randomProductIndex(allProducts.length)].images;
+
+    //    compared all new Image with currently rendered images, and make sure no duplicates exist.
+    while (img1Render === newImage1 || newImage1 === img2Render || newImage1 === img3Render) {
+        newImage1 = allProducts[randomProductIndex(allProducts.length)].images;
+        console.log("here");
+    }
+    while (img2Render === newImage2 || newImage2 === newImage1 || newImage2 === img1Render || newImage2 === img3Render) {
+        console.log("here");
+        newImage2 = allProducts[randomProductIndex(allProducts.length)].images;
+    }
+
+    while (img3Render === newImage3 || newImage3 === newImage1 || newImage3 === newImage2 || newImage3 === img1Render || newImage3 === img2Render) {
+        console.log('here');
+        newImage3 = allProducts[randomProductIndex(allProducts.length)].images;
+        
+    }
+console.log(newImage1);
+
+    rightImage.src = newImage1;
+    leftImage.src = newImage2;
+    centerImage.src = newImage3;
+}
+renderProducts();
+
+
+
 
 function renderResults() {
     for (var i = 0; i < allProducts.length; i++) {
@@ -99,5 +137,7 @@ function renderResults() {
         resultsRow.appendChild(votesData)
         resultsNav.appendChild(resultsRow)
     }
+
 }
+
 
