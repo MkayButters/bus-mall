@@ -2,4 +2,9 @@ img {
     height: 300px;
     width: 300px;
     display: inline;
+    float: right;
+}
+
+div {
+    float: left;
 }
