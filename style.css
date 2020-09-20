@@ -1,7 +1,6 @@
-img {
+#left , #center , #right {
     height: 300px;
     width: 300px;
-    display: inline;
     float: right;
 }
 
