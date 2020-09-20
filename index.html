@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>    
+<head>
     <link rel="stylesheet" type="text/css" href="./style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"
+        integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg=="
+        crossorigin="anonymous"></script>
     <title>Bus-Mall</title>
 </head>
 
@@ -14,9 +16,13 @@
         <img id="center">
         <img id="right">
     </div>
-    <canvas id="chart" width="400" height="400"></canvas>
-
+    <canvas id="chart"></canvas>
+    <input name="product" type="text">
+    <button type="submit">Save to local storage</button>
+    </form>
     <script src="app.js"></script>
+    <script src="chart.js"></script>
+    <script src="catalog.js"></script>
 </body>
 
 </html>

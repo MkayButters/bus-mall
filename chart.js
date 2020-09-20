@@ -1,17 +1,30 @@
 'use strict'
 
 var canvasEl = document.getElementById('chart');
-var ctx = canvasEl.getContext('2d');
+var allProductsString = '';
+var allProductsData = [];
 
+
+if (localStorage.productData) {
+  allProductsString = localStorage.getItem('chart');
+  allProductsData = JSON.parse(allProductsString);
+}
+
+var productLabels = [];
+var productVotes = [];
+
+for (var i = 0; i < allProductsData.length; i++) {
+  productVotes.push(allProductsData[i].votes);
+  productLabels.push(allProductsData[i].name);
+}
 
 var chartConfig = {
   type: 'bar',
   data: {
-
-    labels: ['Suitcase', 'Banana Holder', 'Ipad Bathroom Mount', 'Rain Boots', 'All-in-one Breakfast Maker', 'Meatball Gum', 'Fun Chair', 'Action Figure', 'Duck Dog Muzzle', 'Dragon Meat', 'Pencap Utensils', 'Dog Shoe Sweepers', 'Pizza Cutter Scissors', 'Shark Sleeping bag', 'Baby Onsee Sweeper', 'Taun-Taun Sleeping Bag', 'Unicorn Meat', 'Tentacle USB', 'Watering Can', 'Unique Wine Glass'],
+    labels: productLabels,
     datasets: [{
       label: '# of Votes',
-
+      data: productVotes,
       data: [12, 19, 3, 5, 2, 3, 500],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -42,4 +55,4 @@ var chartConfig = {
     }
   }
 }
-var chart = new Chart(ctx, chartConfig);
+new Chart(canvasEl, chartConfig);

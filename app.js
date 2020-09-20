@@ -1,6 +1,7 @@
 'use strict'
 
 var allProductNames = ['Suitcase', 'Banana Holder', 'Ipad Bathroom Mount', 'Rain Boots', 'All-in-one Breakfast Maker', 'Meatball Gum', 'Fun Chair', 'Action Figure', 'Duck Dog Muzzle', 'Dragon Meat', 'Pencap Utensils', 'Dog Shoe Sweepers', 'Pizza Cutter Scissors', 'Shark Sleeping bag', 'Baby Onsee Sweeper', 'Taun-Taun Sleeping Bag', 'Unicorn Meat', 'Tentacle USB', 'Watering Can', 'Unique Wine Glass'];
+//product names in array to make typing easier
 var roundsOfVotes = 25;
 var allProducts = [];
 
@@ -13,7 +14,7 @@ var rightImage = document.getElementById('right');
 
 
 
-function randomProductIndex(max) {
+function randomProductIndex(max) {//function to create a random product
     return Math.floor(Math.random() * Math.floor(max));
 }
 
@@ -45,7 +46,7 @@ new ProductName(allProductNames[16], 'images/unicorn.jpg');
 new ProductName(allProductNames[17], 'images/usb.gif');
 new ProductName(allProductNames[18], 'images/water-can.jpg');
 new ProductName(allProductNames[19], 'images/wine-glass.jpg');
-
+//creating new ProductName constructor function that the product names are passed through and the link to where the image is located
 function renderImage() {
     var indexOne = randomProductIndex(allProducts.length);
     var indexTwo = randomProductIndex(allProducts.length);
@@ -61,14 +62,14 @@ function renderImage() {
     centerImage.views++
     rightImage.src = thirdProduct.images
     rightImage.views++
-}
+}// adding random images and then adding to the views inside the constructor function
 renderImage();
 
 function oneClickVote(click) {
     for (var i = 0; i < allProducts.length; i++) {
         if (click.target.src.includes(allProducts[i].images)) {
             allProducts[i].votes++
-        }
+        }//everytime a product is clicked it adds a vote to the product
     }
 
     if (roundsOfVotes > 0) {
@@ -78,8 +79,9 @@ function oneClickVote(click) {
         leftImage.removeEventListener('click', oneClickVote);
         centerImage.removeEventListener('click', oneClickVote);
         renderResults();
+        localStorage.setItem('chart', JSON.stringify(allProducts))
     }
-    roundsOfVotes -= 1
+    roundsOfVotes -= 1 //they get 25 countdown to 0 of rounds of images to show up
 }
 
 rightImage.addEventListener('click', oneClickVote);
@@ -101,20 +103,18 @@ function renderProducts() {
     //    compared all new Image with currently rendered images, and make sure no duplicates exist.
     while (img1Render === newImage1 || newImage1 === img2Render || newImage1 === img3Render) {
         newImage1 = allProducts[randomProductIndex(allProducts.length)].images;
-        console.log("here");
+    
     }
     while (img2Render === newImage2 || newImage2 === newImage1 || newImage2 === img1Render || newImage2 === img3Render) {
-        console.log("here");
+       
         newImage2 = allProducts[randomProductIndex(allProducts.length)].images;
     }
 
     while (img3Render === newImage3 || newImage3 === newImage1 || newImage3 === newImage2 || newImage3 === img1Render || newImage3 === img2Render) {
-        console.log('here');
-        newImage3 = allProducts[randomProductIndex(allProducts.length)].images;
         
-    }
-console.log(newImage1);
+        newImage3 = allProducts[randomProductIndex(allProducts.length)].images;
 
+    }
     rightImage.src = newImage1;
     leftImage.src = newImage2;
     centerImage.src = newImage3;
@@ -124,20 +124,19 @@ renderProducts();
 
 
 
-function renderResults() {
-    for (var i = 0; i < allProducts.length; i++) {
-        var item = allProducts[i]
-        var resultsRow = document.createElement('tr')
-        var nameData = document.createElement('td')
-        var votesData = document.createElement('td')
-        nameData.textContent = (item.name + ":  ")
-        resultsRow.appendChild(nameData)
-        resultsNav.appendChild(resultsRow)
-        votesData.textContent = item.votes
-        resultsRow.appendChild(votesData)
-        resultsNav.appendChild(resultsRow)
-    }
+// function renderChartResults() {
+    // for (var i = 0; i < allProducts.length; i++) {
+//         var item = allProducts[i]
+//         var resultsRow = document.createElement('tr')
+//         var nameData = document.createElement('td')
+//         var votesData = document.createElement('td')
+//         nameData.textContent = (item.name + ":  ")
+//         resultsRow.appendChild(nameData)
+//         resultsNav.appendChild(resultsRow)
+//         votesData.textContent = item.votes
+//         resultsRow.appendChild(votesData)
+//         resultsNav.appendChild(resultsRow)
+//     }
 
-}
-
+// }
 
